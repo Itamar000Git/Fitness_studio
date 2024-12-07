@@ -1,3 +1,5 @@
+import gym.management.Sessions.SessionType;
+
 import java.util.ArrayList;
 //neww
 public class Instructor extends Person{

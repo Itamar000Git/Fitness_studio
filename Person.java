@@ -34,7 +34,18 @@ public class Person{
     public int getID(){
         return this.ID;
     }
+    public int getBalance(){
+        return this.balance;
+    }
+    //neww
+    public void setBalance(int b){
+      balance = balance-b;
+    }
+    public Gender getGen() {
+        return gen;
+    }
+    //endneww
 
-//("David", 500, Gender.Male, "20-02-1978");
+
     
 }

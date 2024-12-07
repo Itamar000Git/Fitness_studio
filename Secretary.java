@@ -2,6 +2,8 @@ import gym.Exception.ClientNotRegisteredException;
 import gym.Exception.DuplicateClientException;
 import gym.Exception.InstructorNotQualifiedException;
 import gym.Exception.InvalidAgeException;
+import gym.management.Sessions.ForumType;
+import gym.management.Sessions.SessionType;
 
 import java.util.ArrayList;
 
@@ -15,6 +17,8 @@ public class Secretary {
           //we need to make sure there is only one sec and the old ond cant do any changes.
           this.sec=p1;
           this.sallary=sal;
+          allClients=new ArrayList<>();//neww
+       // allClients.add(new Client(p1));//neww
   }
 
   public Client registerClient(Person p1) throws InvalidAgeException, DuplicateClientException {
@@ -29,11 +33,14 @@ public class Secretary {
       return null;
   }
   private boolean checkIfExist(Person p1){
-      for(int i=0;i<allClients.size(); i++){
-          if(p1.getID() ==allClients.get(i).getID()){
-              return false;
+      if(!allClients.isEmpty()){
+          for(int i=0;i<allClients.size(); i++){
+              if(p1.getID() ==allClients.get(i).getID()){
+                  return false;
+              }
           }
       }
+
       return true;
   }
 
@@ -49,7 +56,7 @@ public class Secretary {
       return null;
   }
 //neww
-public Session addSession(SessionType s,String str, ForumType f_type, Instructor ins) throws InstructorNotQualifiedException {
+public Session addSession(SessionType s, String str, ForumType f_type, Instructor ins) throws InstructorNotQualifiedException {
       //need to chack if qualified, if he's available
 
       if(ins.getqualifiedList().contains(s)) {
@@ -60,14 +67,33 @@ public Session addSession(SessionType s,String str, ForumType f_type, Instructor
 return null;
 }
 //endneww
-public void registerClientToLesson(Client c, Session s){
-      //balance
-      //forume type
-      //not already registerd
-      //not duplicate schedual
 
+    //neww
+public boolean registerClientToLesson(Client c, Session s) throws DuplicateClientException, ClientNotRegisteredException {
+      if(!allClients.contains(c)){
+          throw new ClientNotRegisteredException();
+      } else if(c.getpersonalSessionList().contains(s)){
+        throw new DuplicateClientException();
+      } else if (c.getBalance()<s.getCost()) {
+          System.out.println("Failed registration: Client doesn't have enough balance");
+          return false;
+      } else if (!c.getMyForums().contains(s.getForum())){
+          if(s.getForum()==ForumType.Seniors){
+          System.out.println("Failed registration: Client doesn't meet the age requirements for this session (Seniors)");
+          }
+          else{
+              System.out.println("Failed registration: Client's gender doesn't match the session's gender requirements");
+          }
+          return false;
+      }
+
+    c.setBalance(s.getCost());
+
+      //not duplicate schedule
+return true;
 
 }
+    //endneww
 public void notify(Session s, String str){
 
 }

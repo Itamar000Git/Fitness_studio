@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Gym{
     private Secretary sec;
     private int balance;
