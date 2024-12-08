@@ -1,4 +1,6 @@
+package gym.customers;
 import gym.management.Sessions.ForumType;
+import gym.management.Sessions.Session;
 
 import java.util.ArrayList;
 
@@ -40,9 +42,9 @@ public class Client extends Person {
 
     private void updateMyforum(){
         myForums.add(ForumType.All);
-        if (this.getGen()==Gender.Female){
+        if (this.getGen()== Gender.Female){
             myForums.add(ForumType.Female);
-        } else if (this.getGen()==Gender.Male) {
+        } else if (this.getGen()== Gender.Male) {
             myForums.add(ForumType.Male);
         }
         if (this.getAge()>65){

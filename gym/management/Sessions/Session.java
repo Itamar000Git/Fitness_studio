@@ -1,3 +1,7 @@
+package gym.management.Sessions;
+
+import gym.customers.Client;
+import gym.customers.Instructor;
 import gym.management.Sessions.ForumType;
 import gym.management.Sessions.SessionType;
 

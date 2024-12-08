@@ -1,3 +1,5 @@
+package gym.customers;
+
 public class Person{
     private int ID;
     private String name;

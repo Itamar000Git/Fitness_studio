@@ -1,3 +1,7 @@
+package gym.management;
+
+import gym.customers.Person;
+
 public class Gym{
     private Secretary sec;
     private int balance;
@@ -8,6 +12,7 @@ public class Gym{
 
     private Gym(){
         this.balance=20000;
+        this.name="CrossFit"; //neww
 
 
     }
@@ -22,18 +27,17 @@ public class Gym{
         }
         return instance;
     }
-//
+
     public void setSecretary(Person p1, int sallary){
         //we need to make sure there is only one sec and the old ond cant do any changes.
-        this.sec=new Secretary(p1,sallary);
+        this.sec=factory.createSecretary(p1,sallary);
 
 
     }
     public Secretary getSecretary(){
         return this.sec;
-
     }
-    //
+
     public void setName(String name) {
         this.name = name;
     }

@@ -1,8 +1,10 @@
+package gym.customers;
+
 import gym.management.Sessions.SessionType;
 
 import java.util.ArrayList;
 
-public class Instructor extends Person{
+public class Instructor extends Person {
     private ArrayList <SessionType> qualifiedList;
     private int payrate;
 
