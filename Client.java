@@ -5,22 +5,25 @@ import java.util.ArrayList;
 public class Client extends Person {
     private ArrayList<String> notifications;
     private Person c1;
-    //neww
+
     private ArrayList<Session> personalSessionList;
     private ArrayList<ForumType> myForums;
-    //endneww
+
     public Client(Person p1){
         super(p1);
         this.c1=p1;
         this.personalSessionList=new ArrayList<>();
         this.myForums=new ArrayList<>();
-        updateMyforum(); ///]neww
+        updateMyforum();
     }
 
     public String getNotifications(){
         return (notifications != null) ? notifications.toString() : "No notifications.";
     }
-    //neww
+    public void setNotifications(String str){
+        notifications.add(str);
+    }
+
     public void addToMySession (Session s){
         if (!(personalSessionList.contains(s))){
             personalSessionList.add(s);
@@ -46,7 +49,7 @@ public class Client extends Person {
             myForums.add(ForumType.Seniors);
         }
     }
-    //endneww
+
 
 
 }

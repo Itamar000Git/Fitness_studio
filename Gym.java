@@ -7,7 +7,9 @@ public class Gym{
     private static Gym instance= new Gym();
 
     private Gym(){
-        this.balance=0;
+        this.balance=20000;
+
+
     }
 
     public static Gym getInstance(){
@@ -36,5 +38,11 @@ public class Gym{
         this.name = name;
     }
 
+    public int getBalance() {
+        return balance;
+    }
 
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }

@@ -37,14 +37,13 @@ public class Person{
     public int getBalance(){
         return this.balance;
     }
-    //neww
     public void setBalance(int b){
-      balance = balance-b;
+      this.balance =b;
     }
     public Gender getGen() {
         return gen;
     }
-    //endneww
+
 
 
     
