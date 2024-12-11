@@ -1,6 +1,9 @@
 package gym.management;
 
 import gym.customers.Person;
+import gym.customers.factory;
+
+import java.util.ArrayList;
 
 public class Gym{
     private Secretary sec;
@@ -11,7 +14,7 @@ public class Gym{
     private static Gym instance= new Gym();
 
     private Gym(){
-        this.balance=20000;
+        this.balance=0;
         this.name="CrossFit"; //neww
 
 
@@ -29,9 +32,11 @@ public class Gym{
     }
 
     public void setSecretary(Person p1, int sallary){
-        //we need to make sure there is only one sec and the old ond cant do any changes.
-        this.sec=factory.createSecretary(p1,sallary);
 
+        if(this.getSecretary()!=null){
+            this.getSecretary().setAccess(false);
+        }
+        this.sec= factory.createSecretary(p1,sallary);
 
     }
     public Secretary getSecretary(){
@@ -48,5 +53,31 @@ public class Gym{
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+       // ArrayList<String> str = new ArrayList<>();
+        System.out.println(instance.getClass().getName()+" Name: "+instance.name);
+        System.out.println(instance.getClass().getName()+" "+instance.getSecretary().toString());
+        System.out.println(instance.getClass().getName()+ " Balance: "+instance.getBalance()+"\n");
+
+        System.out.println("Clients Data:");
+        for (int i=0;i<instance.getSecretary().getAllClients().size();i++) {
+            System.out.println(instance.getSecretary().getAllClients().get(i).toString());
+        }
+        System.out.println(" ");
+        System.out.println("Employees Data:");
+        for (int i=0;i<instance.getSecretary().getinsArr().size();i++) {
+            System.out.println(instance.getSecretary().getinsArr().get(i).toString());
+        }
+        System.out.println(instance.getSecretary().toString2()+"\n");
+
+        System.out.println("Sessions Data:");
+        for (int i=0; i<instance.getSecretary().getSesList().size();i++){
+            System.out.println(instance.getSecretary().getSesList().get(i).toString());
+        }
+
+        return "";
     }
 }

@@ -2,6 +2,7 @@ package gym.management.Sessions;
 
 import gym.customers.Client;
 import gym.customers.Instructor;
+import gym.customers.Person;
 import gym.management.Sessions.ForumType;
 import gym.management.Sessions.SessionType;
 
@@ -17,12 +18,34 @@ public class Session{
     private ArrayList<Client> partArr;
     private int capacity;
 
-    public Session(SessionType type, String date, ForumType forum, Instructor i){
+    private Session(SessionType type, String date, ForumType forum, Instructor i){
         this.type=type;
         this.date=date;
         this.forum=forum;
         this.i=i;
         this.partArr=new ArrayList<>();
+        i.setSessionCount(i.getSessionCount()+1);
+
+        switch (this.type){
+            case Ninja -> {
+                this.capacity=5;
+                this.cost=150;
+            }
+            case Pilates -> {
+                this.capacity=30;
+                this.cost=60;
+            }
+            case ThaiBoxing -> {
+                this.capacity=20;
+                this.cost=100;
+            }
+            case MachinePilates -> {
+                this.capacity=10;
+                this.cost=80;
+            }
+        }
+    }
+    private Session(){
     }
 
     public int getCost() {
@@ -57,5 +80,16 @@ public class Session{
 
     public SessionType getType(){
         return this.type;
+    }
+
+    public static Session myContructor(SessionType type, String date, ForumType forum, Instructor i){
+        return new Session(type,date,forum,i);
+    }
+
+    @Override
+    public String toString() {
+        String str=(this.part+"/"+this.capacity);
+        return (this.getClass().getName() + " Type: " + this.getType() + " | Date: " + this.getDate() + " | Forum: " + this.getForum() + " | " + this.getI().getClass().getName()
+                + ": " + this.getI().getName() + " | Participants: " + str);
     }
 }

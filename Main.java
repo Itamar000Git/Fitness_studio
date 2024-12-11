@@ -34,6 +34,7 @@ public class Main {
         Client c6 = gymSecretary.registerClient(p7);
         Client c7 = gymSecretary.registerClient(p8);
 
+
         try {
             Client c8 = gymSecretary.registerClient(p9);
         } catch (InvalidAgeException e) {

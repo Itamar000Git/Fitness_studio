@@ -7,7 +7,7 @@ public class Person{
     private String b_day;
     private Gender gen;
     private int age;
-    private static int ID_runner=1000;
+    private static int ID_runner=1111;
 
     public Person(String name, int balance, Gender gen, String b_day){
     this.name=name;
@@ -22,13 +22,17 @@ public class Person{
         this.balance=p1.balance;
         this.gen=p1.gen;
         this.b_day=p1.b_day;
+        this.ID=p1.ID;
+    }
+
+    public Person() {
+
     }
 
     public String getName(){
        return this.name;
     }
     public int getAge(){
-        //20-02-1978
             int year= Integer.parseInt( b_day.substring(6));
             this.age=2024-year;
         return age;
@@ -46,7 +50,7 @@ public class Person{
         return gen;
     }
 
-
-
-    
+    public String getB_day() {
+        return b_day;
+    }
 }

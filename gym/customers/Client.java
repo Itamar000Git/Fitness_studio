@@ -4,20 +4,24 @@ import gym.management.Sessions.Session;
 
 import java.util.ArrayList;
 
-public class Client extends Person {
+public class Client extends Person implements notifications {
     private ArrayList<String> notifications;
-    private Person c1;
+    //private Person c1;
 
     private ArrayList<Session> personalSessionList;
     private ArrayList<ForumType> myForums;
 
-    public Client(Person p1){
+    private Client(Person p1){
         super(p1);
-        this.c1=p1;
         this.personalSessionList=new ArrayList<>();
         this.myForums=new ArrayList<>();
+        this.notifications=new ArrayList<>(); //neww
         updateMyforum();
     }
+    private Client(){
+        super();
+    }
+
 
     public String getNotifications(){
         return (notifications != null) ? notifications.toString() : "No notifications.";
@@ -50,6 +54,22 @@ public class Client extends Person {
         if (this.getAge()>65){
             myForums.add(ForumType.Seniors);
         }
+    }
+
+    public static Client myContructor(Person p1){
+        return new Client(p1);
+    }
+
+
+    @Override
+    public void update(String s1) {
+        this.setNotifications(s1);
+
+    }
+    @Override
+    public String toString(){
+        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | "+this.getGen().getClass().getName()+": "+ this.getGen()+
+                " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance());
     }
 
 
