@@ -58,9 +58,9 @@ public class Gym{
     @Override
     public String toString() {
        // ArrayList<String> str = new ArrayList<>();
-        System.out.println(instance.getClass().getName()+" Name: "+instance.name);
-        System.out.println(instance.getClass().getName()+" "+instance.getSecretary().toString());
-        System.out.println(instance.getClass().getName()+ " Balance: "+instance.getBalance()+"\n");
+        System.out.println("Gym Name: "+instance.name);
+        System.out.println("Gym Secretary: "+instance.getSecretary().toString());
+        System.out.println("Gym Balance: "+instance.getBalance()+"\n");
 
         System.out.println("Clients Data:");
         for (int i=0;i<instance.getSecretary().getAllClients().size();i++) {

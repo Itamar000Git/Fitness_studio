@@ -89,7 +89,7 @@ public class Session{
     @Override
     public String toString() {
         String str=(this.part+"/"+this.capacity);
-        return (this.getClass().getName() + " Type: " + this.getType() + " | Date: " + this.getDate() + " | Forum: " + this.getForum() + " | " + this.getI().getClass().getName()
+        return ("Session Type: " + this.getType() + " | Date: " + this.getDate() + " | Forum: " + this.getForum() + " | " + this.getI().getClass().getName()
                 + ": " + this.getI().getName() + " | Participants: " + str);
     }
 }

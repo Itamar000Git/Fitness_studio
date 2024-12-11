@@ -274,7 +274,7 @@ public void notify(String str1, String str2){
 
       }
       if (flag){
-          logs.add("A message was sent to everyone registered for a session on "+str1+" : Heavy traffic reported around the gym today. Plan ahead to avoid missing your session!");
+          logs.add("A message was sent to everyone registered for a session on "+strPattern(str1+"T11:11").substring(0,10)+" : Heavy traffic reported around the gym today. Plan ahead to avoid missing your session!");//neww
       }
 
   }
