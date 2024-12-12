@@ -1,5 +1,9 @@
 package gym.customers;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 public class Person{
     private int ID;
     private String name;
@@ -33,8 +37,15 @@ public class Person{
        return this.name;
     }
     public int getAge(){
-            int year= Integer.parseInt( b_day.substring(6));
-            this.age=2024-year;
+        //03-07-1998
+        //LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.of(2024,12,28);
+       int year= Integer.parseInt( b_day.substring(6));
+       int m= Integer.parseInt( b_day.substring(3,5));
+       int d=Integer.parseInt( b_day.substring(0,2));
+       LocalDate birth = LocalDate.of(year,m,d);
+       this.age= (int) ChronoUnit.YEARS.between(birth,today);
+
         return age;
     }
     public int getID(){

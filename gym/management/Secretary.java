@@ -170,23 +170,23 @@ public boolean registerClientToLesson(Client c, Session s) throws DuplicateClien
         throw new DuplicateClientException();
     }
     if (comp<0) {
-        logs.add("Failed registration: gym.management.Sessions.Session is not in the future");
+        logs.add("Failed registration: Session is not in the future");
         b= false;
     }
        if (!c.getMyForums().contains(s.getForum())){
           if(s.getForum()==ForumType.Seniors){
-              logs.add("Failed registration: gym.customers.Client doesn't meet the age requirements for this session (Seniors)");
+              logs.add("Failed registration: Client doesn't meet the age requirements for this session (Seniors)");
 
           }
           else{
-              logs.add("Failed registration: gym.customers.Client's gender doesn't match the session's gender requirements");
+              logs.add("Failed registration: Client's gender doesn't match the session's gender requirements");
 
           }
           b= false;
       }
 
        if (c.getBalance()<s.getCost()) {
-          logs.add("Failed registration: gym.customers.Client doesn't have enough balance");
+          logs.add("Failed registration: Client doesn't have enough balance");
 
           b= false;
       }
@@ -364,14 +364,14 @@ public void notify(String str){
     public String toString(){
         ;
        // ID: 1113 | Name: Maayan | gym.customers.Gender: Female | Birthday: 21-12-2005 | Age: 19 | Balance: 50 | Role: gym.management.Secretary | Salary per Month: 8000
-      return (this.getClass().getName()+ " ID: "+this.getID()+" | Name: "+this.getName()+" | "+this.getGen().getClass().getName()+": "+ this.getGen()+
-              " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: "+this.getClass().getName()+" | Salary per Month: "+this.sallary);
+      return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
+              " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Secretary"+" | Salary per Month: "+this.sallary);
     }
     public String toString2(){
 
         // ID: 1113 | Name: Maayan | gym.customers.Gender: Female | Birthday: 21-12-2005 | Age: 19 | Balance: 50 | Role: gym.management.Secretary | Salary per Month: 8000
-        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | "+this.getGen().getClass().getName()+": "+ this.getGen()+
-                " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: "+this.getClass().getName()+" | Salary per Month: "+this.sallary);
+        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
+                " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Secretary | Salary per Month: "+this.sallary);
     }
 
 

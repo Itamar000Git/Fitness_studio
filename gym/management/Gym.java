@@ -66,7 +66,7 @@ public class Gym{
         for (int i=0;i<instance.getSecretary().getAllClients().size();i++) {
             System.out.println(instance.getSecretary().getAllClients().get(i).toString());
         }
-        System.out.println(" ");
+        System.out.println("");
         System.out.println("Employees Data:");
         for (int i=0;i<instance.getSecretary().getinsArr().size();i++) {
             System.out.println(instance.getSecretary().getinsArr().get(i).toString());
@@ -74,10 +74,11 @@ public class Gym{
         System.out.println(instance.getSecretary().toString2()+"\n");
 
         System.out.println("Sessions Data:");
-        for (int i=0; i<instance.getSecretary().getSesList().size();i++){
+        for (int i=0; i<instance.getSecretary().getSesList().size()-1;i++){
             System.out.println(instance.getSecretary().getSesList().get(i).toString());
         }
+        //System.out.print();
 
-        return "";
+        return instance.getSecretary().getSesList().get(instance.getSecretary().getSesList().size()-1).toString();
     }
 }

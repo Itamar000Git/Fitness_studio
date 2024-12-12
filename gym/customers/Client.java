@@ -68,7 +68,7 @@ public class Client extends Person implements notifications {
     }
     @Override
     public String toString(){
-        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | "+this.getGen().getClass().getName()+": "+ this.getGen()+
+        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
                 " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance());
     }
 

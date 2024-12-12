@@ -53,11 +53,11 @@ public class Instructor extends Person {
     public String toString(){
         String str=(String) this.getqualifiedList().get(0).toString();
 
-        for (int i=0; i<this.getqualifiedList().size(); i++){
-            str =str + " , "+ (String) this.getqualifiedList().get(i).toString();
+        for (int i=1; i<this.getqualifiedList().size(); i++){
+            str =str + ", "+ (String) this.getqualifiedList().get(i).toString();
         }
-        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | "+this.getGen().getClass().getName()+": "+ this.getGen()+
-                " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: "+this.getClass().getName()+" | Salary per Hour: "+ this.payrate+ " | Certified Classes: " +str);
+        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
+                " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Instructor | Salary per Hour: "+ this.payrate+ " | Certified Classes: " +str);
     }
 
     public void setp_rate(int pay){
