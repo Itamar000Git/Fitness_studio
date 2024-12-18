@@ -27,10 +27,7 @@ public class factory {
         return Secretary.myContructor(p1,sal);
     }
 
-    public static Session createSession(SessionType type, String date, ForumType forum, Instructor i) {
 
-        return Session.myContructor(type,date,forum,i);
-    }
 
     public static Client createClient(Person p1) {
         return Client.myContructor(p1); //neww

@@ -43,8 +43,9 @@ public class Secretary extends Person {
 
   public boolean checkaccess(){
       if (!this.isAccess()) {
-          System.out.println("Error: Former secretaries are not permitted to perform actions");
-          return false;
+          //System.out.println("Error: Former secretaries are not permitted to perform actions");
+          throw new NullPointerException();
+          //return false;
       }
       return true;
   }
@@ -119,30 +120,30 @@ public class Secretary extends Person {
   }
 
 
-  private String strPattern(String str){
-      int year,month,day,hour,minute;
-      year=Integer.parseInt(str.substring(6,10));
-      month=Integer.parseInt(str.substring(3,5));
-      day=Integer.parseInt(str.substring(0,2));
-      hour=Integer.parseInt(str.substring(11,13));
-      minute=Integer.parseInt(str.substring(14));
-     // "01-01-2025 14:00"
-      //2025-01-23T10:00
-      LocalDateTime dateTime =LocalDateTime.of(year,month,day,hour,minute);
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-      String pattern_str=dateTime.format(formatter);
-        return pattern_str;
-  }
+//  private String strPattern(String str){
+//      int year,month,day,hour,minute;
+//      year=Integer.parseInt(str.substring(6,10));
+//      month=Integer.parseInt(str.substring(3,5));
+//      day=Integer.parseInt(str.substring(0,2));
+//      hour=Integer.parseInt(str.substring(11,13));
+//      minute=Integer.parseInt(str.substring(14));
+//     // "01-01-2025 14:00"
+//      //2025-01-23T10:00
+//      LocalDateTime dateTime =LocalDateTime.of(year,month,day,hour,minute);
+//      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+//      String pattern_str=dateTime.format(formatter);
+//        return pattern_str;
+//  }
 
 public Session addSession(SessionType s, String str, ForumType f_type, Instructor ins) throws InstructorNotQualifiedException {
     if(!checkaccess()){
         return null;
     }
-    String patt_str=strPattern(str);
+    String patt_str=PatternModify.strPattern(str);
 
       if(ins.getqualifiedList().contains(s)) {
-          Session ses =factory.createSession(s, str, f_type, ins);
-          logs.add("Created new session: "+s.toString()+" on "+patt_str+" with instructor: "+ ins.getName());
+          Session ses = SessionFactory.createSession(s, str, f_type, ins); //need to change to session factory
+          logs.add("Created new session: "+ s +" on "+patt_str+" with instructor: "+ ins.getName());
           sesList.add(ses);
           return ses;
       }else throw new InstructorNotQualifiedException();
@@ -153,16 +154,14 @@ public boolean registerClientToLesson(Client c, Session s) throws DuplicateClien
     if(!checkaccess()){
         return false;
     }
-    int y,m,d;
+//    int y,m,d;
     LocalDate today = LocalDate.now();
-    y=Integer.parseInt(s.getDate().substring(6,10));
-    m=Integer.parseInt(s.getDate().substring(3,5));
-    d=Integer.parseInt(s.getDate().substring(0,2));
-    LocalDate secDate=LocalDate.of(y,m,d);
+//    y=Integer.parseInt(s.getDate().substring(6,10));
+//    m=Integer.parseInt(s.getDate().substring(3,5));
+//    d=Integer.parseInt(s.getDate().substring(0,2));
+    LocalDate secDate=PatternModify.Dateptr(s);
     int comp=secDate.compareTo(today);
     boolean b=true;
-
-
     if(!allClients.contains(c)){
           throw new ClientNotRegisteredException();
     }
@@ -203,48 +202,49 @@ public boolean registerClientToLesson(Client c, Session s) throws DuplicateClien
       s.setPart();
       c.getpersonalSessionList().add(s);
       s.getPartArr().add(c);
-    Gym.getInstance().setBalance(Gym.getInstance().getBalance()+s.getCost()); //neww
+      Gym.getInstance().setBalance(Gym.getInstance().getBalance()+s.getCost()); //neww
 
     if(this.getID()==c.getID()){//neww
-        syncsecBalance(c,this);
+        Balance.syncsecBalance(c,this);
     }
 
     for(int i=0;i<insArr.size(); i++){
         if (insArr.get(i).getID()==c.getID()){
-            syncinsBalance(c,insArr.get(i));
+            Balance.syncinsBalance(c,insArr.get(i));
         }
     }
     for (int i=0; i<allPersons.size(); i++){ //neww
         if (allPersons.get(i).getID()==c.getID()){
-            syncPerBalance(c,allPersons.get(i));
+            Balance.syncPerBalance(c,allPersons.get(i));
         }
     }
 
 
-      logs.add("Registered client: "+c.getName()+" to session: "+s.getType()+" on "+strPattern(s.getDate())+" for price: "+s.getCost());
+      logs.add("Registered client: "+c.getName()+" to session: "+s.getType()+" on "+PatternModify.strPattern(s.getDate())+" for price: "+s.getCost());
 
 return b;
 
 }
-public void syncPerBalance(Client c, Person p){ //neww
-        p.setBalance(c.getBalance());
-  }
-public void syncinsBalance(Client c, Instructor ins){
-   ins.setBalance(c.getBalance());
-}
-public void syncsecBalance(Client c, Secretary sec){ //neww
-      sec.setBalance(c.getBalance());
-}
+//public void syncPerBalance(Client c, Person p){ //neww
+//        p.setBalance(c.getBalance());
+//  }
+//public void syncinsBalance(Client c, Instructor ins){
+//   ins.setBalance(c.getBalance());
+//}
+//public void syncsecBalance(Client c, Secretary sec){ //neww
+//      sec.setBalance(c.getBalance());
+//}
 
 
 public void notify(Session s, String str){
     if(!checkaccess()){
         return;
     }
-      for(int i=0; i<s.getPartArr().size();i++){
-        s.getPartArr().get(i).update(str); //neww
-      }
-    logs.add("A message was sent to everyone registered for session "+s.getType()+" on "+strPattern(s.getDate())+" : The instructor will be a few minutes late for the session");
+    GymNotify.notify(s,str,logs);
+//      for(int i=0; i<s.getPartArr().size();i++){
+//        s.getPartArr().get(i).update(str); //neww
+//      }
+//    logs.add("A message was sent to everyone registered for session "+s.getType()+" on "+PatternModify.strPattern(s.getDate())+" : The instructor will be a few minutes late for the session");
 
 }
 public void notify(String str1, String str2){
@@ -260,22 +260,24 @@ public void notify(String str1, String str2){
 //    int comp=secDate.compareTo(today);
 
      // LocalDate date1 = LocalDate.parse(str1);
-      boolean flag=false;
-      for (int i=0; i<allClients.size(); i++){
-          for (int j=0; j<allClients.get(i).getpersonalSessionList().size();j++){
 
-              String sub=allClients.get(i).getpersonalSessionList().get(j).getDate().substring(0,10);
-              //LocalDate date2=LocalDate.parse(sub);
-              if (str1.equals(sub) && !allClients.get(i).getNotifications().contains(str2)){
-                  allClients.get(i).update(str2);
-                  flag=true;
-              }
-          }
-
-      }
-      if (flag){
-          logs.add("A message was sent to everyone registered for a session on "+strPattern(str1+"T11:11").substring(0,10)+" : Heavy traffic reported around the gym today. Plan ahead to avoid missing your session!");//neww
-      }
+    GymNotify.notify(str1,str2,allClients,logs);
+//      boolean flag=false;
+//      for (int i=0; i<allClients.size(); i++){
+//          for (int j=0; j<allClients.get(i).getpersonalSessionList().size();j++){
+//
+//              String sub=allClients.get(i).getpersonalSessionList().get(j).getDate().substring(0,10);
+//              //LocalDate date2=LocalDate.parse(sub);
+//              if (str1.equals(sub) && !allClients.get(i).getNotifications().contains(str2)){
+//                  allClients.get(i).update(str2);
+//                  flag=true;
+//              }
+//          }
+//
+//      }
+//      if (flag){
+//          logs.add("A message was sent to everyone registered for a session on "+PatternModify.strPattern(str1+"T11:11").substring(0,10)+" : Heavy traffic reported around the gym today. Plan ahead to avoid missing your session!");//neww
+//      }
 
   }
 
@@ -283,15 +285,16 @@ public void notify(String str){
     if(!checkaccess()){
         return;
     }
-    boolean flag=false;
-    for(int i=0; i<allClients.size();i++){
-       allClients.get(i).update(str);
-       flag=true;
-    }
-
-    if (flag){
-        logs.add("A message was sent to all gym clients: Happy New Year to all our valued clients!");
-    }
+//    boolean flag=false;
+//    for(int i=0; i<allClients.size();i++){
+//       allClients.get(i).update(str);
+//       flag=true;
+//    }
+//
+//    if (flag){
+//        logs.add("A message was sent to all gym clients: Happy New Year to all our valued clients!");
+//    }
+    GymNotify.notify(str,allClients,logs);
 
   }
 
@@ -299,22 +302,20 @@ public void notify(String str){
       if(!checkaccess()){
           return;
       }
-
       this.setBalance(this.getBalance()+sallary);
 
       Gym.getInstance().setBalance(Gym.getInstance().getBalance()-sallary);
 
       for (int i=0;i<insArr.size();i++){
         int sal=insArr.get(i).getSessionCount()*insArr.get(i).getPayrate();
-        //insArr.get(i).updatedSallery(sal);
           insArr.get(i).setBalance( insArr.get(i).getBalance()+sal);
           Gym.getInstance().setBalance(Gym.getInstance().getBalance()-sal);
           for (int j=0; j<allClients.size(); j++){
               if(allClients.get(j).getID()==insArr.get(i).getID()) {
-                  syncClientBalance(allClients.get(j), insArr.get(i));
+                  Balance.syncClientBalance(allClients.get(j), insArr.get(i));
               }
-              if (allClients.get(j).getID()==this.getID()) {  //neww
-                  syncClientBalance(allClients.get(j),this);
+              if (allClients.get(j).getID()==this.getID()) {
+                  Balance.syncClientBalance(allClients.get(j),this);
               }
           }
 
@@ -322,23 +323,22 @@ public void notify(String str){
       logs.add("Salaries have been paid to all employees");
 
   }
-    public void syncClientBalance(Client c, Instructor ins){
-        c.setBalance(ins.getBalance());
-    }
-    public void syncClientBalance(Client c, Secretary sec){ //neww
-        c.setBalance(sec.getBalance());
-    }
+//    public void syncClientBalance(Client c, Instructor ins){
+//        c.setBalance(ins.getBalance());
+//    }
+//    public void syncClientBalance(Client c, Secretary sec){ //neww
+//        c.setBalance(sec.getBalance());
+//    }
   public void printActions(){
       if(!checkaccess()){
           return;
       }
-
       for (int i=0;i<logs.size(); i++){
           System.out.println(logs.get(i));
       }
   }
 
-  public boolean isAccess(){
+    public boolean isAccess(){
       return this.access;
   }
 
@@ -367,7 +367,7 @@ public void notify(String str){
       return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
               " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Secretary"+" | Salary per Month: "+this.sallary);
     }
-    public String toString2(){
+    public String toString2(){ //maybe not importent
 
         // ID: 1113 | Name: Maayan | gym.customers.Gender: Female | Birthday: 21-12-2005 | Age: 19 | Balance: 50 | Role: gym.management.Secretary | Salary per Month: 8000
         return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
