@@ -14,9 +14,9 @@ public class MachinePilatesSession extends Session{
     private Instructor i;
     private int part;//participant
     private ArrayList<Client> partArr;
-    public MachinePilatesSession(){
-        super();
-    }
+   // public MachinePilatesSession(){
+   //     super();
+    //}
 
     public MachinePilatesSession(String date, ForumType forum, Instructor i) {
         this.date=date;

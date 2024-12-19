@@ -1,4 +1,4 @@
-package gym.management;///neww
+package gym.management;
 
 import gym.management.Sessions.Session;
 

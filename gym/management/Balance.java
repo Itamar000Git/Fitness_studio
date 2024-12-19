@@ -14,7 +14,6 @@ public class Balance {
     public static void syncsecBalance(Client c, Secretary sec){ //neww
         sec.setBalance(c.getBalance());
     }
-
     public static void syncClientBalance(Client c, Instructor ins){
         c.setBalance(ins.getBalance());
     }

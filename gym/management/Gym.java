@@ -71,7 +71,7 @@ public class Gym{
         for (int i=0;i<instance.getSecretary().getinsArr().size();i++) {
             System.out.println(instance.getSecretary().getinsArr().get(i).toString());
         }
-        System.out.println(instance.getSecretary().toString2()+"\n");
+        System.out.println(instance.getSecretary().toString()+"\n");
 
         System.out.println("Sessions Data:");
         for (int i=0; i<instance.getSecretary().getSesList().size()-1;i++){

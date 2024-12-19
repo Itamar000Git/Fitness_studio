@@ -27,7 +27,6 @@ public class GymNotify {
             for (int j=0; j<allClients.get(i).getpersonalSessionList().size();j++){
 
                 String sub=allClients.get(i).getpersonalSessionList().get(j).getDate().substring(0,10);
-                //LocalDate date2=LocalDate.parse(sub);
                 if (str1.equals(sub) && !allClients.get(i).getNotifications().contains(str2)){
                     allClients.get(i).update(str2);
                     flag=true;
