@@ -1,24 +1,7 @@
 import gym.Exception.*;
 import gym.customers.*;
-import gym.management.Gym;
-import gym.management.Secretary;
+import gym.management.*;
 import gym.management.Sessions.*;
-import gym.Exception.ClientNotRegisteredException;
-import gym.Exception.DuplicateClientException;
-import gym.Exception.InstructorNotQualifiedException;
-import gym.Exception.InvalidAgeException;
-import gym.customers.Client;
-import gym.customers.Gender;
-import gym.customers.Instructor;
-import gym.customers.Person;
-import gym.management.Gym;
-import gym.management.Secretary;
-import gym.management.Sessions.ForumType;
-import gym.management.Sessions.Session;
-import gym.management.Sessions.SessionType;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +32,6 @@ public class Main {
         Client c5 = gymSecretary.registerClient(p6);
         Client c6 = gymSecretary.registerClient(p7);
         Client c7 = gymSecretary.registerClient(p8);
-
 
         try {
             Client c8 = gymSecretary.registerClient(p9);
@@ -113,6 +95,7 @@ public class Main {
         }
 
         gymSecretary.unregisterClient(c2);
+
         try {
             gymSecretary.registerClientToLesson(c2, s3);
         } catch (ClientNotRegisteredException e) {
@@ -144,7 +127,5 @@ public class Main {
 
         System.out.print(gym);
     }
-
-
 
 }

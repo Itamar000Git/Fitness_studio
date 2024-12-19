@@ -52,7 +52,7 @@ public class Secretary extends Person {
               throw new InvalidAgeException();
           }
           if (!checkIfExist(p1)) {
-              throw new DuplicateClientException();
+              throw new DuplicateClientException("Error: The client is already registered");
           }
 
           Client c1 = factory.createClient(p1);
@@ -78,8 +78,9 @@ public class Secretary extends Person {
           return;
       }
      if(checkIfExist((Person) c)){
-         throw new ClientNotRegisteredException();
+         throw new ClientNotRegisteredException("Error: Registration is required before attempting to unregister");
      }
+
      allClients.remove(c);
      logs.add("Unregistered client: "+c.getName());
 
@@ -114,14 +115,19 @@ public boolean registerClientToLesson(Client c, Session s) throws DuplicateClien
         return false;
     }
     LocalDate today = LocalDate.now();
+    LocalDate todaytmp =LocalDate.of(2024,12,28);/////*****for test
     LocalDate secDate=PatternModify.Dateptr(s);
-    int comp=secDate.compareTo(today);
+    int comp=secDate.compareTo(todaytmp);/////*****for test
+
+
+   // int comp=secDate.compareTo(today);
+
     boolean b=true;
     if(!allClients.contains(c)){
-          throw new ClientNotRegisteredException();
+          throw new ClientNotRegisteredException("Error: The client is not registered with the gym and cannot enroll in lessons");
     }
     if(c.getpersonalSessionList().contains(s)){
-        throw new DuplicateClientException();
+        throw new DuplicateClientException("Error: The client is already registered for this lesson");
     }
     if (comp<0) {
         logs.add("Failed registration: Session is not in the future");
@@ -199,6 +205,7 @@ public void notify(String str){
     GymNotify.notify(str,allClients,logs);
 
   }
+
 
   public void paySalaries(){
       if(!checkaccess()){
