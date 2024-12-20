@@ -14,10 +14,6 @@ public class PilatesSession extends Session{
     private Instructor i;
     private int part;//participant
     private ArrayList<Client> partArr;
-    public PilatesSession(){
-        super();
-
-    }
 
     public PilatesSession(String date, ForumType forum, Instructor i) {
         this.date=date;

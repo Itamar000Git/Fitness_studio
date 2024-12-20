@@ -4,8 +4,14 @@ import gym.customers.Client;
 import gym.management.Sessions.Session;
 
 import java.util.ArrayList;
- //neww
+/**
+ *This class provides static methods to send notifications to gym clients or session participants.
+ *The methods handle different scenarios, such as notifying all clients, notifying based on session date,
+ *or notifying participants of a specific session.
+ */
 public class GymNotify {
+    // Sends a general notification to all clients in the gym.
+    // Adds a log to logs arrayList if the message was sent.
     public static void notify(String str, ArrayList<Client> allClients, ArrayList<String> logs){
         boolean flag=false;
         for(int i=0; i<allClients.size();i++){
@@ -19,7 +25,8 @@ public class GymNotify {
 
     }
 
-
+    // Sends a notification to clients registered for sessions on a specific date.
+    // Adds a log entry if the message was sent.
     public static void notify(String str1, String str2,ArrayList<Client> allClients, ArrayList<String> logs ){
 
         boolean flag=false;
@@ -39,7 +46,8 @@ public class GymNotify {
         }
 
     }
-
+    // Sends a notification to all participants of a specific session.
+    // Adds a log entry with session details.
     public static void notify(Session s, String str, ArrayList<String> logs){
         for(int i=0; i<s.getPartArr().size();i++){
             s.getPartArr().get(i).update(str);

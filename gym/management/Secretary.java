@@ -21,7 +21,7 @@ public class Secretary extends Person {
     private static ArrayList<Person> allPersons;
     private static ArrayList<Instructor> insArr;
     private static ArrayList<Session> sesList;
-    public static ArrayList<String> logs =new ArrayList<>();
+    private static ArrayList<String> logs =new ArrayList<>();
 
   private Secretary(Person p1, int sal){
       super(p1);
@@ -37,17 +37,16 @@ public class Secretary extends Person {
       logs.add("A new secretary has started working at the gym: "+this.getName());
   }
 
-  public boolean checkaccess(){
+  private void checkaccess(){
       if (!this.isAccess()) {
           throw new NullPointerException();
       }
-      return true;
   }
 
     public Client registerClient(Person p1) throws InvalidAgeException, DuplicateClientException {
-      if(!checkaccess()){
-          return null;
-      }
+      checkaccess();
+
+
           if (p1.getAge() < 18) {
               throw new InvalidAgeException();
           }
@@ -74,9 +73,7 @@ public class Secretary extends Person {
   }
 
   public void unregisterClient(Client c) throws ClientNotRegisteredException {
-      if(!checkaccess()){
-          return;
-      }
+      checkaccess();
      if(checkIfExist((Person) c)){
          throw new ClientNotRegisteredException("Error: Registration is required before attempting to unregister");
      }
@@ -86,9 +83,7 @@ public class Secretary extends Person {
 
   }
   public Instructor hireInstructor(Person p1, int p_rate, ArrayList<SessionType> arr){
-      if(!checkaccess()){
-          return null;
-      }
+      checkaccess();
       Instructor ins = factory.createInstructor(p1,p_rate,arr);
                   insArr.add(ins);
       logs.add("Hired new instructor: "+p1.getName()+" with salary per hour: "+p_rate);
@@ -97,9 +92,7 @@ public class Secretary extends Person {
   }
 
 public Session addSession(SessionType s, String str, ForumType f_type, Instructor ins) throws InstructorNotQualifiedException {
-    if(!checkaccess()){
-        return null;
-    }
+    checkaccess();
     String patt_str=PatternModify.strPattern(str);
 
       if(ins.getqualifiedList().contains(s)) {
@@ -111,9 +104,7 @@ public Session addSession(SessionType s, String str, ForumType f_type, Instructo
 }
 
 public boolean registerClientToLesson(Client c, Session s) throws DuplicateClientException, ClientNotRegisteredException {
-    if(!checkaccess()){
-        return false;
-    }
+    checkaccess();
     LocalDate today = LocalDate.now();
     LocalDate todaytmp =LocalDate.of(2024,12,28);/////*****for test
     LocalDate secDate=PatternModify.Dateptr(s);
@@ -186,31 +177,23 @@ return b;
 }
 
 public void notify(Session s, String str){
-    if(!checkaccess()){
-        return;
-    }
+    checkaccess();
     GymNotify.notify(s,str,logs);
 }
 public void notify(String str1, String str2){
-    if(!checkaccess()){
-        return;
-    }
+    checkaccess();
     GymNotify.notify(str1,str2,allClients,logs);
   }
 
 public void notify(String str){
-    if(!checkaccess()){
-        return;
-    }
+    checkaccess();
     GymNotify.notify(str,allClients,logs);
 
   }
 
 
   public void paySalaries(){
-      if(!checkaccess()){
-          return;
-      }
+      checkaccess();
       this.setBalance(this.getBalance()+sallary);
 
       Gym.getInstance().setBalance(Gym.getInstance().getBalance()-sallary);
@@ -234,9 +217,7 @@ public void notify(String str){
   }
 
   public void printActions(){
-      if(!checkaccess()){
-          return;
-      }
+      checkaccess();
       for (int i=0;i<logs.size(); i++){
           System.out.println(logs.get(i));
       }
@@ -270,9 +251,4 @@ public void notify(String str){
       return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
               " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Secretary"+" | Salary per Month: "+this.sallary);
     }
-//    public String toString2(){ //maybe not importent
-//        // ID: 1113 | Name: Maayan | gym.customers.Gender: Female | Birthday: 21-12-2005 | Age: 19 | Balance: 50 | Role: gym.management.Secretary | Salary per Month: 8000
-//        return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
-//                " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Secretary | Salary per Month: "+this.sallary);
-//    }
 }
