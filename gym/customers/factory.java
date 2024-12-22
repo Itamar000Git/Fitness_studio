@@ -11,26 +11,17 @@ import gym.management.Sessions.SessionType;
 
 import java.util.ArrayList;
 
-
+/**
+ * This class provides static factory methods to create instances of various roles in the gym,
+ * such as Instructor, Secretary, and Client.
+ */
 public class factory {
-
-//    public static Person createPerson(String name, int balance, Gender gen, String b_day) {
-//
-//        return new Person(name, balance, gen, b_day);
-//    }
 
     public static Instructor createInstructor(Person p1, int p_rate, ArrayList<SessionType> arr) {
         return Instructor.myContructor(p1, p_rate, arr);
     }
-
-    public static Secretary createSecretary(Person p1, int sal) {
-        return Secretary.myContructor(p1,sal);
-    }
-
-
-
     public static Client createClient(Person p1) {
-        return Client.myContructor(p1); //neww
+        return Client.myContructor(p1);
     }
 }
 

@@ -36,7 +36,7 @@ public class Gym{
         if(this.getSecretary()!=null){
             this.getSecretary().setAccess(false);
         }
-        this.sec= factory.createSecretary(p1,sallary);
+        this.sec= Secretary.myContructor(p1,sallary);
 
     }
     public Secretary getSecretary(){
