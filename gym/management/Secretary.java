@@ -214,6 +214,7 @@ public class Secretary extends Person {
      */
     public boolean registerClientToLesson(Client c, Session s) throws DuplicateClientException, ClientNotRegisteredException {
     checkaccess();
+    //LocalDate today = LocalDate.of(2024,12,28); //if wanted some date change here
     LocalDate today = LocalDate.now();
     LocalDate secDate=PatternModify.Dateptr(s);
     int comp=secDate.compareTo(today);

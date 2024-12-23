@@ -14,20 +14,22 @@ public class MachinePilatesSession extends Session{
     private Instructor i;
     private int part;//participant
     private ArrayList<Client> partArr;
-   // public MachinePilatesSession(){
-   //     super();
-    //}
 
-    public MachinePilatesSession(String date, ForumType forum, Instructor i) {
+    // constructor for MachinePilates session
+    private MachinePilatesSession(String date, ForumType forum, Instructor i) {
         this.date=date;
         this.forum=forum;
         this.i=i;
         this.partArr=new ArrayList<>();
         this.part=0;
-        i.setSessionCount(i.getSessionCount()+1);
-        //need to fill
+        i.setSessionCount(i.getSessionCount()+1);    //increasing this instructor session count by 1.
+    }
+    // Factory method for creating a new MachinePilatesSession object and prevent from other class creates new object with "new".
+    public static MachinePilatesSession MachinePilatesSessionConst(String date, ForumType forum, Instructor i){
+        return new MachinePilatesSession(date,forum,i);
     }
 
+    //Getters & Setters
     @Override
     public int getCost(){
         return cost;
@@ -64,6 +66,8 @@ public class MachinePilatesSession extends Session{
     public SessionType getType(){
         return this.type;
     }
+
+    // Overrides the toString method to provide a string of session details
     @Override
     public String toString() {
         String str=(this.part+"/"+this.capacity);

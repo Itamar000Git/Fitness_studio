@@ -14,11 +14,9 @@ public class ThaiBoxingSession extends Session{
     private Instructor i;
     private int part;//participant
     private ArrayList<Client> partArr;
-    public ThaiBoxingSession(){
-        super();
-    }
 
-    public ThaiBoxingSession(String date, ForumType forum, Instructor i) {
+    // constructor for ThaiBoxing session
+    private ThaiBoxingSession(String date, ForumType forum, Instructor i) {
         this.date=date;
         this.forum=forum;
         this.i=i;
@@ -26,6 +24,12 @@ public class ThaiBoxingSession extends Session{
         this.part=0;
         i.setSessionCount(i.getSessionCount()+1);
     }
+    // Factory method for creating a new ThaiBoxingSession object and prevent from other class creates new object with "new".
+    public static ThaiBoxingSession ThaiBoxingSessionConst(String date, ForumType forum, Instructor i){
+        return new ThaiBoxingSession(date,forum,i);
+    }
+
+    //Getters & Setters
     @Override
     public int getCost(){
         return cost;
@@ -62,6 +66,8 @@ public class ThaiBoxingSession extends Session{
     public SessionType getType(){
         return this.type;
     }
+
+    // Overrides the toString method to provide a string of session details
     @Override
     public String toString() {
         String str=(this.part+"/"+this.capacity);

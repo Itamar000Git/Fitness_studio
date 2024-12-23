@@ -1,25 +1,22 @@
 package gym.management;
 
 import gym.customers.Person;
-import gym.customers.factory;
-
-import java.util.ArrayList;
-
 public class Gym{
     private Secretary sec;
     private int balance;
 
     private String name;
 
-    private static Gym instance= new Gym();
 
+    private static Gym instance; // Singleton instance of the Gym class
+
+    // Private constructor to enforce Singleton pattern
     private Gym(){
         this.balance=0;
-        this.name="CrossFit"; //neww
-
-
+        this.name="CrossFit";
     }
 
+    // Retrieve the singleton instance of the Gym class and create the first onw if needed.
     public static Gym getInstance(){
         if (instance==null){
          synchronized(Gym.class){
@@ -31,6 +28,9 @@ public class Gym{
         return instance;
     }
 
+    //getters & setters
+
+    // If a secretary already exists, revoke their access, then create and assign a new secretary using the Factory class
     public void setSecretary(Person p1, int sallary){
 
         if(this.getSecretary()!=null){
@@ -55,10 +55,9 @@ public class Gym{
         this.balance = balance;
     }
 
+    //Prints and returns all the details on the gym.
     @Override
-    public String toString() {
-       // ArrayList<String> str = new ArrayList<>();
-        System.out.println("Gym Name: "+instance.name);
+    public String toString() {System.out.println("Gym Name: "+instance.name);
         System.out.println("Gym Secretary: "+instance.getSecretary().toString());
         System.out.println("Gym Balance: "+instance.getBalance()+"\n");
 
@@ -77,8 +76,6 @@ public class Gym{
         for (int i=0; i<instance.getSecretary().getSesList().size()-1;i++){
             System.out.println(instance.getSecretary().getSesList().get(i).toString());
         }
-        //System.out.print();
-
         return instance.getSecretary().getSesList().get(instance.getSecretary().getSesList().size()-1).toString();
     }
 }

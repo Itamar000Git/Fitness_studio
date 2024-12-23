@@ -13,6 +13,7 @@ public class Person{
     private int age;
     private static int ID_runner=1111;
 
+    // constructor for person
     public Person(String name, int balance, Gender gen, String b_day){
     this.name=name;
     this.balance=balance;
@@ -21,6 +22,8 @@ public class Person{
     this.ID=ID_runner;
     ID_runner++;
     }
+
+    //this constructor is used by us for the client/instructor constructor that extend from person.
     public Person(Person p1){
         this.name=p1.name;
         this.balance=p1.balance;
@@ -29,17 +32,15 @@ public class Person{
         this.ID=p1.ID;
     }
 
-    public Person() {
-
-    }
-
+    //Getters & Setters
     public String getName(){
        return this.name;
     }
+
+    //Calculates the number of years between two dates
     public int getAge(){
-        //03-07-1998
-        //LocalDate today = LocalDate.now();
-        LocalDate today = LocalDate.of(2024,12,28);
+        //LocalDate today = LocalDate.of(2024,12,28); //if wanted some date change here
+        LocalDate today =LocalDate.now();
        int year= Integer.parseInt( b_day.substring(6));
        int m= Integer.parseInt( b_day.substring(3,5));
        int d=Integer.parseInt( b_day.substring(0,2));

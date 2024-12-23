@@ -24,8 +24,6 @@ public class PatternModify {
         day=Integer.parseInt(str.substring(0,2));
         hour=Integer.parseInt(str.substring(11,13));
         minute=Integer.parseInt(str.substring(14));
-        // "01-01-2025 14:00"
-        //2025-01-23T10:00
         LocalDateTime dateTime =LocalDateTime.of(year,month,day,hour,minute);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         String pattern_str=dateTime.format(formatter);

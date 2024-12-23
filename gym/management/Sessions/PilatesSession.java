@@ -15,7 +15,8 @@ public class PilatesSession extends Session{
     private int part;//participant
     private ArrayList<Client> partArr;
 
-    public PilatesSession(String date, ForumType forum, Instructor i) {
+    // constructor for Pilates session
+    private PilatesSession(String date, ForumType forum, Instructor i) {
         this.date=date;
         this.forum=forum;
         this.i=i;
@@ -23,10 +24,13 @@ public class PilatesSession extends Session{
         this.part=0;
         i.setSessionCount(i.getSessionCount()+1);
     }
-
+    // Factory method for creating a new PilatesSession object and prevent from other class creates new object with "new".
+    public static PilatesSession PilatesSessionConst(String date, ForumType forum, Instructor i){
+        return new PilatesSession(date,forum,i);
+    }
+    //Getters & Setters
     @Override
     public int getCost(){
-
         return cost;
     }
     @Override
@@ -61,6 +65,8 @@ public class PilatesSession extends Session{
     public SessionType getType(){
         return this.type;
     }
+
+    // Overrides the toString method to provide a string of session details
     @Override
     public String toString() {
         String str=(this.part+"/"+this.capacity);

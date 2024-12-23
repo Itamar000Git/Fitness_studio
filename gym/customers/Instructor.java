@@ -11,6 +11,7 @@ public class Instructor extends Person {
     private int payrate;
     private int sessionCount;
 
+    //private constructor of Instructor
     private Instructor(Person p1 ,int p_rate, ArrayList<SessionType> arr) {
         super(p1);
         this.payrate=p_rate;
@@ -18,28 +19,18 @@ public class Instructor extends Person {
         qualifiedList.addAll(arr);
         this.sessionCount=0;
     }
-    private Instructor(){
-        super();
-    }
-
-    public void addSession(SessionType s){
-
-        qualifiedList.add(s);
-    }
-    public ArrayList<SessionType> getqualifiedList(){
-        return qualifiedList;
-    }
-
+    // Factory method for creating a new Client object
     public static Instructor myContructor(Person p1 ,int p_rate, ArrayList<SessionType> arr){
         return new Instructor(p1,p_rate,arr);
     }
 
-    public int getSessionCount() {
-        return sessionCount;
+    //getters & setters
+    public ArrayList<SessionType> getqualifiedList(){
+        return qualifiedList;
     }
 
-    public void updatedSallery(int sal){
-        this.setBalance(this.getBalance()+sal);
+    public int getSessionCount() {
+        return sessionCount;
     }
 
     public void setSessionCount(int c) {
@@ -49,6 +40,8 @@ public class Instructor extends Person {
     public int getPayrate() {
         return payrate;
     }
+
+    // Overrides the toString method to provide a string of Instructor details
     @Override
     public String toString(){
         String str=(String) this.getqualifiedList().get(0).toString();
@@ -59,15 +52,5 @@ public class Instructor extends Person {
         return ("ID: "+this.getID()+" | Name: "+this.getName()+" | Gender: "+ this.getGen()+
                 " | Birthday: "+this.getB_day()+" | Age: "+this.getAge()+" | Balance: "+ this.getBalance()+" | Role: Instructor | Salary per Hour: "+ this.payrate+ " | Certified Classes: " +str);
     }
-
-    public void setp_rate(int pay){
-        this.payrate=pay;
-    }
-    public void setarr(ArrayList<SessionType> arr){
-
-        this.qualifiedList.addAll(arr);
-    }
-
-    //ID: 1114 | Name: Shachar | gym.customers.Gender: Female | Birthday: 09-04-1958 | Age: 66 | Balance: 290 | Role: gym.customers.Instructor | Salary per Hour: 70 | Certified Classes: ThaiBoxing, MachinePilates
 
 }
