@@ -65,7 +65,6 @@ public class Secretary extends Person {
      * @return
      */
     public static Secretary myContructor(Person p1, int sal){
-
         return new Secretary(p1, sal);
     }
     // Checks if the secretary is allowed to perform actions, Sends back "NullPointerException()" if doesn't have access.

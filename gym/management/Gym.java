@@ -13,7 +13,6 @@ public class Gym{
     // Private constructor to enforce Singleton pattern
     private Gym(){
         this.balance=0;
-        this.name="CrossFit";
     }
 
     // Retrieve the singleton instance of the Gym class and create the first onw if needed.

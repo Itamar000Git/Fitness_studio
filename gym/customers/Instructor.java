@@ -15,8 +15,8 @@ public class Instructor extends Person {
     private Instructor(Person p1 ,int p_rate, ArrayList<SessionType> arr) {
         super(p1);
         this.payrate=p_rate;
-        qualifiedList=new ArrayList<>();
-        qualifiedList.addAll(arr);
+        this.qualifiedList=new ArrayList<>();
+        this.qualifiedList.addAll(arr);
         this.sessionCount=0;
     }
     // Factory method for creating a new Client object

@@ -25,9 +25,6 @@ public class Client extends Person implements notifications {
     public void setNotifications(String str){
         notifications.add(str);
     }
-
-
-
     public ArrayList<Session> getpersonalSessionList(){
         return personalSessionList;
     }

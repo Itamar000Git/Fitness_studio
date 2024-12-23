@@ -21,7 +21,6 @@ class SessionFactory {
             case MachinePilates :
                 s= MachinePilatesSessionConst(date,forum,i);
                 break;
-
             case Pilates :
                 s= PilatesSessionConst(date,forum,i);
                 break;

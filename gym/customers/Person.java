@@ -1,7 +1,6 @@
 package gym.customers;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class Person{
@@ -62,7 +61,6 @@ public class Person{
     public Gender getGen() {
         return gen;
     }
-
     public String getB_day() {
         return b_day;
     }
