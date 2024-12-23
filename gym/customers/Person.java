@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 public class Person{
     private int ID;
     private String name;
-    private int balance;
+    private int[] balance;
     private String b_day;
     private Gender gen;
     private int age;
@@ -16,7 +16,8 @@ public class Person{
     // constructor for person
     public Person(String name, int balance, Gender gen, String b_day){
     this.name=name;
-    this.balance=balance;
+    this.balance =new int[1];
+    this.balance[0]=balance;
     this.gen=gen;
     this.b_day=b_day;
     this.ID=ID_runner;
@@ -53,10 +54,10 @@ public class Person{
         return this.ID;
     }
     public int getBalance(){
-        return this.balance;
+        return this.balance[0];
     }
     public void setBalance(int b){
-      this.balance =b;
+      this.balance[0] =b;
     }
     public Gender getGen() {
         return gen;
@@ -65,4 +66,5 @@ public class Person{
     public String getB_day() {
         return b_day;
     }
+
 }

@@ -203,7 +203,6 @@ public class Secretary extends Person {
       2. Adds 1 to the participant session number.
       3. Adds the session to the client sessions list.
       4. Adds the client to the session clients list.
-      5. Sync all balances.
      * Few notes: In this function used self build exceptions.
      * This function Used live today date for compare the client registration in real time.
      * @param c
@@ -257,21 +256,6 @@ public class Secretary extends Person {
       s.getPartArr().add(c); //add the client to the list of this session
       Gym.getInstance().setBalance(Gym.getInstance().getBalance()+s.getCost());  // set balance gym
 
-    // Syncs client balance (help us to save the current balance when an entity  (client, instructor, secretary) has overlapping roles.
-    if(this.getID()==c.getID()){
-        Balance.syncsecBalance(c,this);
-    }
-
-    for(int i=0;i<insArr.size(); i++){
-        if (insArr.get(i).getID()==c.getID()){
-            Balance.syncinsBalance(c,insArr.get(i));
-        }
-    }
-    for (int i=0; i<allPersons.size(); i++){
-        if (allPersons.get(i).getID()==c.getID()){
-            Balance.syncPerBalance(c,allPersons.get(i));
-        }
-    }
       logs.add("Registered client: "+c.getName()+" to session: "+s.getType()+" on "+PatternModify.strPattern(s.getDate())+" for price: "+s.getCost());
 
 return b;
@@ -312,14 +296,6 @@ public void notify(String str){
           insArr.get(i).setBalance( insArr.get(i).getBalance()+sal);
           Gym.getInstance().setBalance(Gym.getInstance().getBalance()-sal);
 
-          for (int j=0; j<allClients.size(); j++){  //sync balance of instructors/client/secretary
-              if(allClients.get(j).getID()==insArr.get(i).getID()) {
-                  Balance.syncClientBalance(allClients.get(j), insArr.get(i));
-              }
-              if (allClients.get(j).getID()==this.getID()) {
-                  Balance.syncClientBalance(allClients.get(j),this);
-              }
-          }
 
       }
       logs.add("Salaries have been paid to all employees");
